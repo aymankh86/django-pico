@@ -4,6 +4,10 @@ from pico import PicoError
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
+from distutils.version import StrictVersion
+import django
+
+DJANGO_VERSION = StrictVersion(django.get_version())
 
 pico.server.DEBUG = settings.DEBUG
 
@@ -29,4 +33,6 @@ def index(request):
 
 def picojs(request):
     f = open(pico.server.pico_path + 'client.js')
+    if DJANGO_VERSION >= StrictVersion('1.8'):
+        return HttpResponse(f.read())
     return HttpResponse(f.read(), mimetype='application/javascript')
