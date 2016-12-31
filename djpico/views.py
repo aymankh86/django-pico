@@ -20,7 +20,7 @@ def index(request):
     path = '/' + request.path.split('/pico/')[-1]
     try:
         pico_response = pico.server.handle_api_v2(path, params, request)
-    except PicoError, e:
+    except PicoError as e:
         pico_response = e.response
     code, reason = pico_response.status.split(' ', 1)
     response = HttpResponse(pico_response.output,

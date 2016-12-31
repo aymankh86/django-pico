@@ -1,7 +1,6 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'pico.js|client.js', 'djpico.views.picojs', name='picojs'),
     url(r'^.*$', 'djpico.views.index', name='index'),
-)
+]
